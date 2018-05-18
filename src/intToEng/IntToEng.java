@@ -11,7 +11,7 @@ public class IntToEng {
 	static final String[] second = { "", "", "twenty", "thirty", "fourty", "fifty", "sixty", "seventy", "eighty",
 			"ninety" };
 
-	static final String[] unit = { "thousand", "million", "billion" };
+	static final String[] unit = { "thousand", "million", "billion"};
 
 	public static void main(String[] args) {
 	    Scanner sc = new Scanner(System.in);
@@ -19,27 +19,27 @@ public class IntToEng {
 		System.out.println(translateEng(input));
 	}
 
-	static String translateEng(int n) {
+	public static String translateEng(int n) {
 		if(n == 0) return first[0];
 		String[] number = new String[10];
 		for(int i=0; i<10;i++) number[i] = "";
-		int a, b, c, count = 0;
+		int low, middle, high, count = 0;
 		for (int i = n; i > 0; i = i / 1000) {
-			a = i % 10;
-			b = (i / 10) % 10;
-			c = (i / 100) % 10;
-			if (c >= 1)
-				number[count] += " " +first[c] + " hundred";
-			if(a == 0 && b == 0)  {
+			low = i % 10;
+			middle = (i / 10) % 10;
+			high = (i / 100) % 10;
+			if (high >= 1)
+				number[count] += " " +first[high] + " hundred";
+			if(low == 0 && middle == 0)  {
 				count++;
 				continue;
 			}
-			if (b < 2)
-				number[count] += " " + first[b * 10 + a];
-			else if(a == 0)
-				number[count] += " " + second[b];
+			if (middle < 2)
+				number[count] += " " + first[middle * 10 + low];
+			else if(low == 0)
+				number[count] += " " + second[middle];
 			else {
-				number[count] += " " + second[b] + " " + first[a];
+				number[count] += " " + second[middle] + " " + first[low];
 			}
 			if(count>=1) number[count] += " " +unit[count-1];
 			count++;
